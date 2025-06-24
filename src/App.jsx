@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Pictorial from './Pictorial'; // <-- Add this
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,6 +18,13 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+       
+       {/* By Jagdeep - pictorial component is here */}
+      <Pictorial />
+
+      {/* Jagdeep - Rest of the content will be here */}
+
+
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
