@@ -1,0 +1,14 @@
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 140px); /* Adjust height minus header/footer */
+  background-color: #f8f8f8;
+}
+
+.center-image {
+  max-width: 80%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
