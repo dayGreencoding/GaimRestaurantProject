@@ -18,10 +18,7 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      {/* By Jagdeep - pictorial component is here */}
-      <Pictorial />
-
-      {/* Jagdeep - Rest of the content will be here */}
+   
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
