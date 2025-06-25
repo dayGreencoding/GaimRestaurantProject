@@ -3,10 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './components/header';
 import Footer from './components/Footer';
 import MainContent from './components/MainContent';
-import Pictorial from './Pictorial';
-
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import Pictorial from './Pictorial'; // <- Added this line to keep Pictorial
 import './App.css';
 
 function App() {
@@ -16,19 +13,9 @@ function App() {
     <Router>
       <div className="app-container">
         <Header />
-
-        <div>
-          <a href="https://vite.dev" target="_blank" rel="noreferrer">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank" rel="noreferrer">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
-        </div>
-
         <h1>Gain Grill</h1>
 
-        {/* Custom pictorial section */}
+        {/* Pictorial Component */}
         <Pictorial />
 
         <div className="card">
