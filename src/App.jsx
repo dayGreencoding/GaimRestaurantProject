@@ -1,16 +1,25 @@
 import React from 'react';
-import Header from './Components/Header'; 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './Components/Header';
+import AboutUs from './Components/AboutUs';
 import MainContent from './Components/MainContent';
 import Footer from './Components/Footer';
 
 function App() {
-  return (
-    <div className="app-container">
-      <Header />
-      <MainContent />
-      <Footer />
-    </div>
-  );
+ return (
+  <div className="app-container">
+   <Header/>
+   <MainContent/>
+   <Routes>
+        
+        <Route path="/about-us" element={<AboutUs />} />
+        
+      </Routes>
+
+   <Footer />
+  </div>
+ )
+  
 }
 
 export default App;
