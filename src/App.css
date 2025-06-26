@@ -1,66 +1,6 @@
-/* Basic reset and layout */
 body, html, #root, .App {
   margin: 0;
   padding: 0;
   height: 100%;
   font-family: Arial, sans-serif;
-}
-
-/* Header */
-.header {
-  background-color: #222;
-  color: white;
-  padding: 1rem 0;
-  text-align: center;
-}
-
-.header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-}
-
-.menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0.5rem 0 0;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-}
-
-.menu a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.menu a:hover {
-  text-decoration: underline;
-}
-
-/* Main content */
-.main-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 140px); /* Adjust height minus header/footer */
-  background-color: #f8f8f8;
-}
-
-.center-image {
-  max-width: 50%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-}
-
-/* Footer */
-.footer {
-  background-color: #222;
-  color: blue;
-  text-align: center;
-  padding: 1rem 0;
-  position: relative;
-  bottom: 0;
-  width: 100%;
 }
