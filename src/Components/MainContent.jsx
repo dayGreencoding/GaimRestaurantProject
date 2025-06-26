@@ -1,6 +1,6 @@
 import React from 'react';
 import './MainContent.css';
-import grillImage from '../assets/grill.jpg';
+import grillImage from '../assets/paneergrill.jpg';
 
 function MainContent() {
   return (
