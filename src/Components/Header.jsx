@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa'; // Import icon
 import logoImage from '../assets/logotop.jpg';
 import './Header.css';
+import LoginDropdown from './LoginDropdown';
+
+
+
 
 const Header = () => {
   return (
@@ -14,9 +18,9 @@ const Header = () => {
 
       <nav className= "nav-links">
 
-        <Link to="/">Home</Link>
-        <Link to="/menu">Menu</Link>
-        <Link to="/about">About</Link>
+        <Link to="/Home">Home</Link>
+        <Link to="/Menu">Menu</Link>
+        <Link to="/About Us">About us</Link>
         <Link to="/contact">Contact</Link>
       </nav>
 
@@ -24,9 +28,7 @@ const Header = () => {
         <Link to="/cart" className="cart-icon">
           <FaShoppingCart />
         </Link>
-        <Link to="/login" className="login-btn">
-          Login/Register
-        </Link>
+         <LoginDropdown/>
       </div>
     </header>
   );
