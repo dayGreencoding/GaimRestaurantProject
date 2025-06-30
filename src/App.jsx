@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './Components/Header';
@@ -5,7 +6,11 @@ import AboutUs from './Components/AboutUs';
 import MainContent from './Components/MainContent';
 import Footer from './Components/Footer';
 import MenuContent from './Components/MenuContent';
-
+import SearchBar from './Components/SearchBar';
+import Login from './Components/Login';
+import Signup from './Components/Signup';
+import CustomerDashboard from './Components/CustomerDashboard';
+import AdminDashboard from './Components/AdminDashboard';
 
 function ScrollToSection() {
   const { pathname } = useLocation();
@@ -23,26 +28,27 @@ function ScrollToSection() {
 
 function App() {
   return (
-    
+    <Router>
       <div className="app-container">
-        
         <Header />
+        <SearchBar />
         <Routes>
           <Route path="/" element={<MainContent />} />
           <Route path="/about-us" element={<AboutUs />} />
-           <Route path="/menu" element={<MenuContent />} />
-          
-          {/* These use the ScrollToSection helper */}
+          <Route path="/menu" element={<MenuContent />} />
           <Route path="/soup-salads" element={<ScrollToSection />} />
           <Route path="/tandoori-starters" element={<ScrollToSection />} />
           <Route path="/tandoori-mains" element={<ScrollToSection />} />
           <Route path="/beverages" element={<ScrollToSection />} />
-         <Route path="/sides" element={<ScrollToSection />} />
-          </Routes>
+          <Route path="/sides" element={<ScrollToSection />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/customer-dashboard" element={<CustomerDashboard />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        </Routes>
         <Footer />
-        
       </div>
-    
+    </Router>
   );
 }
 
