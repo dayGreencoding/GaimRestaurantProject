@@ -1,15 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaShoppingCart } from 'react-icons/fa'; 
+// src/Components/Header.jsx
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
 import logoImage from '../assets/logotop.jpg';
 import './Header.css';
-import LoginDropdown from './LoginDropdown';
 
 const Header = () => {
+  const [userRole, setUserRole] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const role = localStorage.getItem('userRole');
+    setUserRole(role);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('userRole');
+    setUserRole(null);
+    navigate('/login');
+  };
+
   return (
     <header className="header">
       <div className="logo">
-        <img src={logoImage} alt="GAI Grill Logo" className="logo-image" />
+        <Link to="/">
+          <img src={logoImage} alt="GAI Grill Logo" className="logo-image" />
+        </Link>
         <span className="logo-text">GAI Grill</span>
       </div>
 
@@ -24,7 +40,23 @@ const Header = () => {
         <Link to="/cart" className="cart-icon">
           <FaShoppingCart />
         </Link>
-        <LoginDropdown />
+
+        {!userRole ? (
+          <>
+            <Link to="/login" className="login-btn">Login</Link>
+            <Link to="/signup" className="login-btn">Register</Link>
+          </>
+        ) : (
+          <>
+            {userRole === 'admin' && (
+              <Link to="/admin-dashboard" className="dashboard-link">Admin Dashboard</Link>
+            )}
+            {userRole === 'customer' && (
+              <Link to="/customer-dashboard" className="dashboard-link">Customer Dashboard</Link>
+            )}
+            <button onClick={handleLogout} className="logout-btn">Logout</button>
+          </>
+        )}
       </div>
     </header>
   );
