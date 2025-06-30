@@ -31,9 +31,21 @@ const Header = () => {
 
       <nav className="nav-links">
         <Link to="/">Home</Link>
-        <Link to="/menu">Menu</Link>
-        <Link to="/about-us">About Us</Link>
-        <Link to="/contact">Contact</Link>
+
+        <div className="menu-dropdown">
+          <button className="dropbtn">Menu ▼</button>
+            <div className="dropdown-content">
+              <Link to="/soup-salads">Soup & Salads</Link>
+              <Link to="/tandoori-starters">Tandoori Starters</Link>
+              <Link to="/tandoori-mains">Tandoori Mains & Sizzlers</Link>
+              <Link to="/beverages">Beverages</Link>
+              <Link to="/sides">Sides</Link>
+            </div>
+        </div>
+
+
+              <Link to="/about-us">About Us</Link>
+              <Link to="/contact">Contact</Link>
       </nav>
 
       <div className="header-right">
