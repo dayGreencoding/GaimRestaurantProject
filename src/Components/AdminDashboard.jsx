@@ -1,12 +1,22 @@
-import React from 'react';
+// src/Components/AdminDashboard.jsx
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const AdminDashboard = () => {
+export default function AdminDashboard() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const role = localStorage.getItem('userRole');
+    if (role !== 'admin') {
+      alert('Access denied. Please login as admin.');
+      navigate('/login');
+    }
+  }, [navigate]);
+
   return (
     <div>
       <h1>Admin Dashboard</h1>
-      <p>Welcome to the admin dashboard!</p>
+      <p>Welcome, administrator!</p>
     </div>
   );
-};
-
-export default AdminDashboard;
+}

@@ -1,33 +1,37 @@
+/* src/Components/Header.css */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
-  color: black;
+  background-color: #111;
+  color: white;
   padding: 1rem 2rem;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
 }
 
 .logo-image {
   height: 40px;
   width: auto;
+  margin-right: 10px;
 }
 
 .logo-text {
   font-size: 1.8rem;
   font-weight: bolder;
-  color: black;
+  color: white;
 }
 
 .nav-links {
   display: flex;
   gap: 1.5rem;
   align-items: center;
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
 }
 
 .nav-links a {
@@ -43,7 +47,6 @@
 .header-right {
   display: flex;
   align-items: center;
-  gap: 1rem;
 }
 
 .cart-icon {
@@ -53,17 +56,31 @@
 }
 
 /* Login button */
-.login-btn {
+.login-btn,
+.dashboard-link {
   background-color: orange;
   color: black;
   padding: 0.4rem 0.8rem;
-  border-radius: 4px;
+  margin-left: 0.5rem;
+  border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
 }
 
 .login-btn:hover {
   background-color: darkorange;
+}
+
+/* Logout button */
+.logout-btn {
+  background-color: orange;
+  color: black;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  margin-left: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 /* Dropdown menu inside nav */
@@ -111,12 +128,3 @@
 .menu-dropdown:hover .dropdown-content {
   display: block;
 }
-
-
-.nav-links {
-  background-color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-}
-
-

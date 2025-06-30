@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
- function CustomerDashboard() {
+export default function CustomerDashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,5 +20,3 @@ import { useNavigate } from 'react-router-dom';
     </div>
   );
 }
-
-export default CustomerDashboard;
