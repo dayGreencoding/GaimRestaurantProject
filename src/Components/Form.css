@@ -2,17 +2,12 @@
 
 .form-container {
   max-width: 400px;
+  margin: 20px auto 0 auto; /* Pushes form down below header */
   padding: 30px;
   border: 1px solid #ddd;
   border-radius: 8px;
   background: #f9f9f9;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-
-  /* Center the form on the screen */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .form-container h2 {
@@ -27,7 +22,8 @@ form label {
   font-weight: 600;
 }
 
-form input {
+form input,
+form select {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;

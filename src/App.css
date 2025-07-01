@@ -4,3 +4,13 @@ body, html, #root, .App {
   height: 100%;
   font-family: Arial, sans-serif;
 }
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
