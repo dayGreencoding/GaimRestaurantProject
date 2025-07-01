@@ -107,6 +107,21 @@ const MenuContent = () => {
             <li><strong>Kulfi (Malai/Mango/Pistachio)</strong> – Indian ice cream ($5.99)</li>
           </ul>
       </section>
+
+      <section id="ice-creams">
+        <h2>🍦 Ice Creams</h2>
+        <br/>
+        <ul>
+          <li><strong>Vanilla Delight</strong> – Classic vanilla scoop with sprinkles ($3.99)</li>
+          <li><strong>Chocolate Fudge</strong> – Rich chocolate ice cream with fudge swirls ($4.49)</li>
+          <li><strong>Mango Tango</strong> – Refreshing mango sorbet with a citrus kick ($4.29)</li>
+          <li><strong>Strawberry Swirl</strong> – Strawberry cream with fruit chunks ($4.19)</li>
+          <li><strong>Kulfi (Pistachio / Malai / Mango)</strong> – Traditional Indian ice cream ($4.99)</li>
+        </ul>
+      </section>
+
+
+
     </main>
   );
 };
