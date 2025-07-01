@@ -27,7 +27,7 @@ function ScrollToSection() {
 
 function App() {
   return (
-    <Router>
+    
       <div className="app-container">
         <Header />
         <SearchBar />
@@ -47,7 +47,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
-    </Router>
+    
   );
 }
 
