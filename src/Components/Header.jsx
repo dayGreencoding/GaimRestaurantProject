@@ -40,7 +40,7 @@ const Header = () => {
               <Link to="/tandoori-mains">Tandoori Mains & Sizzlers</Link>
               <Link to="/beverages">Beverages</Link>
               <Link to="/sides">Sides</Link>
-                 <Link to="/menu#ice-creams">Ice Creams</Link>
+                 <Link to="/ice-creams">Ice Creams</Link>
             </div>
         </div>
 
@@ -50,7 +50,8 @@ const Header = () => {
       </nav>
 
       <div className="header-right">
-        <Link to="/cart" className="cart-icon">
+        <Link to="/Cart" className="cart-icon">
+          🛒 Cart
           <FaShoppingCart />
         </Link>
 

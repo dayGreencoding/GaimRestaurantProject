@@ -6,6 +6,7 @@ import MainContent from './Components/MainContent';
 import Footer from './Components/Footer';
 import MenuContent from './Components/MenuContent';
 import SearchBar from './Components/SearchBar';
+import Cart from './Components/Cart';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
 import CustomerDashboard from './Components/CustomerDashboard';
@@ -40,6 +41,8 @@ function App() {
           <Route path="/tandoori-mains" element={<ScrollToSection />} />
           <Route path="/beverages" element={<ScrollToSection />} />
           <Route path="/sides" element={<ScrollToSection />} />
+          <Route path="/ice-creams" element={<ScrollToSection />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/customer-dashboard" element={<CustomerDashboard />} />
