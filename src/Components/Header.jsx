@@ -40,6 +40,7 @@ const Header = () => {
               <Link to="/tandoori-mains">Tandoori Mains & Sizzlers</Link>
               <Link to="/beverages">Beverages</Link>
               <Link to="/sides">Sides</Link>
+                 <Link to="/menu#ice-creams">Ice Creams</Link>
             </div>
         </div>
 
