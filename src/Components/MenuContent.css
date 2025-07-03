@@ -21,4 +21,19 @@ li {
   margin-bottom: 0.5rem;
 }
 
+.menu-main-headline {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #800000;
+  margin-top: 2rem;
+  margin-bottom: 3rem; /* 👈 creates space before h2 */
+  font-family: 'Georgia', serif;
+  font-weight: bold;
+  border-bottom: 3px double #e0b400;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  width: 100%;
+}
+
+
 

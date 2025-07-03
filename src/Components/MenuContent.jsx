@@ -4,6 +4,8 @@ import "./MenuContent.css";
 const MenuContent = () => {
   return (
     <main className="menu-content">
+
+      <h1 className="menu-main-headline">🍽️ Our Signature Menu</h1>
       <section id="soup-salads">
         <h2>🥣 Soup & Salads</h2>
         <h3>🥦 Veg Soups & Salads</h3>
