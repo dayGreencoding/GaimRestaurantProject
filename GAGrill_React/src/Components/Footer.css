@@ -1,0 +1,9 @@
+/* src/Components/Footer.css */
+.footer {
+  background-color: #111;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  margin-top: 25px; /* adds space between form and footer */
+}
