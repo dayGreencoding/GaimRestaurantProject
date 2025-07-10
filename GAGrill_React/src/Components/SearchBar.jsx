@@ -16,7 +16,7 @@ function SearchBar({ setQuery }) {
 
         setTimeout(() => {
           if (localQuery.toLowerCase().includes('menu')) {
-            const section = document.getElementById('menu-main-headline');
+            const section = document.getElementById('menu-headline');
             if (section) {
               section.scrollIntoView({ behavior: 'smooth' });
             }
@@ -24,7 +24,7 @@ function SearchBar({ setQuery }) {
         }, 500);
       } else {
         if (localQuery.toLowerCase().includes('menu')) {
-          const section = document.getElementById('menu-main-headline');
+          const section = document.getElementById('menu-headline');
           if (section) {
             section.scrollIntoView({ behavior: 'smooth' });
           }
