@@ -1,4 +1,4 @@
-package com.gai.grill.restaurant_backend;
+package com.gaigrill.restaurantbackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

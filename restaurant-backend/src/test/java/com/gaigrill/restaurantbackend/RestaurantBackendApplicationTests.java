@@ -1,4 +1,4 @@
-package com.gai.grill.restaurant_backend;
+package com.gaigrill.restaurantbackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
