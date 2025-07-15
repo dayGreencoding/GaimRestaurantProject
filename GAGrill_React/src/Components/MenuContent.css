@@ -36,4 +36,110 @@ li {
 }
 
 
+.clickable-item {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  padding: 0.3rem;
+}
 
+.clickable-item:hover {
+  background-color: #fff5cc;
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  max-width: 400px;
+  margin: auto;
+  border-radius: 8px;
+  position: relative;
+}
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.modal {
+  background: #fff;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal h2 {
+  margin-bottom: 0.5rem;
+  color: #800000;
+  font-weight: bold;
+}
+
+.modal p {
+  margin: 0.3rem 0;
+  color: #333;
+}
+
+.modal input[type="number"] {
+  width: 60px;
+  padding: 0.3rem;
+  margin: 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.modal button {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  margin: 0.3rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 120px;
+  transition: background 0.3s;
+}
+
+.modal button:first-of-type {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal button:first-of-type:hover {
+  background-color: #0056b3;
+}
+
+.modal button:last-of-type {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.modal button:last-of-type:hover {
+  background-color: #ddd;
+}
+html {
+  scroll-behavior: smooth;
+}

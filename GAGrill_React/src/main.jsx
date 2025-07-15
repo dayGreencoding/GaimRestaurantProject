@@ -4,10 +4,14 @@ import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 
+import { CartProvider } from './Components/CartContext'; // ✅ Adjust this path if needed
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <CartProvider> {/* ✅ This makes cart globally accessible */}
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </CartProvider>
   </React.StrictMode>
 );
