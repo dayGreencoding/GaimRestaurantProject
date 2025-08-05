@@ -18,19 +18,20 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/dashboard.html",        // ✅ allow dashboard page without login
-                                "/api/dashboard/**",      // ✅ allow all dashboard-related APIs
-                                "/css/**", "/js/**", "/images/**", "/static/**"  // ✅ static resources
+                                "/dashboard.html",         // ✅ Allow dashboard
+                                "/api/dashboard/**",       // ✅ Allow dashboard API
+                                "/api/menu/**",            // ✅ Allow menu API
+                                "/css/**", "/js/**", "/images/**", "/static/**" // ✅ Static assets
                         ).permitAll()
-                        .anyRequest().authenticated() // 🔐 secure everything else
+                        .anyRequest().authenticated() // 🔒 Secure other requests
                 )
-                .httpBasic(AbstractHttpConfigurer::disable); // enable basic auth for secured endpoints
+                .httpBasic(Customizer.withDefaults()); // Basic auth enabled (optional)
 
         return http.build();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance(); // ⚠️ Only for development/testing
+        return NoOpPasswordEncoder.getInstance(); // ⚠️ For development only
     }
 }
