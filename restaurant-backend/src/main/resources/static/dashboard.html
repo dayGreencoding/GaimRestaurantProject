@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaigrill Restaurant Dashboard</title>
+    <style>
+        /* General page styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1603091864642-07f1ac3f1fa5'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Overlay to darken the background */
+        ::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container for the title and login button */
+        .container {
+            text-align: center;
+            z-index: 1;
+            color: white;
+            margin-top: 100px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+            color: #ff6347;
+        }
+
+        p {
+            font-size: 1.4rem;
+            margin-top: 20px;
+            color: #d1d1d1;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Style for the login button */
+        .login-btn {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #ff6347, #ff1493);
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 50px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+            transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #ff1493, #ff6347);
+            transform: scale(1.1);
+        }
+
+        /* Dropdown menu styling */
+        .dropdown {
+            position: absolute;
+            top: 110px;
+            right: 10px;
+            display: none;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+            z-index: 1;
+            width: 200px;
+        }
+
+        .dropdown button {
+            width: 100%;
+            padding: 15px;
+            background-color: #444;
+            color: #fff;
+            font-size: 1.2rem;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            border-radius: 8px;
+            transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .dropdown button:hover {
+            background-color: #ff6347;
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        /* Content section */
+        .content {
+            margin-top: 50px;
+            text-align: center;
+            width: 90%;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            color: white;
+            font-size: 1.1rem;
+            border: 1px solid #fff;
+        }
+
+        th {
+            background-color: #ff6347;
+        }
+
+        /* Button on hover effect */
+        table td:hover {
+            background-color: rgba(255, 99, 71, 0.5);
+            cursor: pointer;
+        }
+
+        /* Responsive design */
+        @media screen and (max-width: 768px) {
+            .login-btn {
+                width: 100%;
+                padding: 12px 0;
+            }
+
+            table {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome to Gaigrill Restaurant Dashboard</h1>
+    <p>This is your secure area.</p>
+
+    <!-- Login Button -->
+    <button class="login-btn" id="loginBtn">Login Portal</button>
+</div>
+
+<!-- Dropdown Menu -->
+<div class="dropdown" id="dropdownMenu">
+    <button onclick="showAdminManagement()">Admin </button>
+    <button onclick="showChefManagement()">Chef/Kitchen </button>
+    <button onclick="showManagerManagement()">Managers</button>
+    <button onclick="showFrontDeskManagement()">Front Desk </button>
+</div>
+
+<!-- Content Display -->
+<div class="content" id="dataContainer"></div>
+
+<script>
+    // Toggle the dropdown visibility
+    document.getElementById('loginBtn').onclick = function() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'none' || dropdown.style.display === '' ? 'block' : 'none';
+    };
+
+    // Fetch and display admin names from the backend
+    function showAdminManagement() {
+        fetch('/api/dashboard/admins', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Basic ' + btoa('admin1:adminpass')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Admin Data:', data);
+            displayData('Admin Management', data);
+        });
+    }
+
+    // Fetch and display chef management data
+    function showChefManagement() {
+        fetch('/api/dashboard/chefs', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Basic ' + btoa('admin1:adminpass')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Chef Data:', data);
+            displayData('Chef/Kitchen Management', data);
+        });
+    }
+
+    // Fetch and display manager data
+    function showManagerManagement() {
+        fetch('/api/dashboard/managers', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Basic ' + btoa('admin1:adminpass')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Manager Data:', data);
+            displayData('Manager Management', data);
+        });
+    }
+
+    // Fetch and display front desk management data
+    function showFrontDeskManagement() {
+        fetch('/api/dashboard/frontdesk', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Basic ' + btoa('admin1:adminpass')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Front Desk Data:', data);
+            displayData('Front Desk Management', data);
+        });
+    }
+
+    // Function to display the fetched data
+    function displayData(title, data) {
+        const container = document.getElementById('dataContainer');
+        container.innerHTML = `<h2>${title}</h2><table><tr><th>ID</th><th>Name</th><th>Employee ID</th></tr>`;
+        data.forEach(item => {
+            container.innerHTML += `<tr><td>${item.id}</td><td>${item.name}</td><td>${item.employeeId}</td></tr>`;
+        });
+        container.innerHTML += `</table>`;
+    }
+</script>
+</body>
+</html>

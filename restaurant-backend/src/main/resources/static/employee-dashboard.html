@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gaigrill Employee Dashboard</title>
+    <style>
+        body {
+          margin: 0;
+          font-family: 'Segoe UI', sans-serif;
+          background: #e3f2fd;
+          color: #333;
+        }
+
+        header {
+          background-color: #1976d2;
+          color: white;
+          padding: 20px;
+          text-align: center;
+          font-size: 24px;
+        }
+
+        nav {
+          display: flex;
+          justify-content: space-around;
+          background-color: #63a4ff;
+          padding: 15px;
+        }
+
+        nav a {
+          color: white;
+          text-decoration: none;
+          font-weight: bold;
+        }
+
+        nav a:hover {
+          text-decoration: underline;
+        }
+
+        section {
+          padding: 30px;
+        }
+
+        .card {
+          background-color: white;
+          border-radius: 10px;
+          padding: 20px;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<header>Gaigrill Restaurant - Employee Dashboard</header>
+<nav>
+    <a href="#">View Orders</a>
+    <a href="#">Update Status</a>
+    <a href="#">Logout</a>
+</nav>
+<section>
+    <div class="card">
+        <h2>Welcome, Employee!</h2>
+        <p>Your tasks for today:</p>
+        <ul>
+            <li>Prepare Cheese Burger x2</li>
+            <li>Mark Order #23 as Delivered</li>
+        </ul>
+    </div>
+</section>
+</body>
+</html>

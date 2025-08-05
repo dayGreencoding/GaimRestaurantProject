@@ -1,0 +1,15 @@
+body {
+    font-family: sans-serif;
+}
+.dashboard-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.card {
+    width: 150px;
+    padding: 20px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    text-align: center;
+}
