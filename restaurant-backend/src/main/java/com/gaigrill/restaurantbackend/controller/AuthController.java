@@ -1,6 +1,5 @@
 package com.gaigrill.restaurantbackend.controller;
-
-import com.gaigrill.restaurantbackend.model.User;
+import com.gaigrill.restaurantbackend. model.User;
 import com.gaigrill.restaurantbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,4 +28,5 @@ public class AuthController {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
     }
+
 }

@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -14,24 +15,20 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(AbstractHttpConfigurer::disable)
+        HttpSecurity httpSecurity = http
+                .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for APIs
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/dashboard.html",         // ✅ Allow dashboard
-                                "/api/dashboard/**",       // ✅ Allow dashboard API
-                                "/api/menu/**",            // ✅ Allow menu API
-                                "/css/**", "/js/**", "/images/**", "/static/**" // ✅ Static assets
-                        ).permitAll()
-                        .anyRequest().authenticated() // 🔒 Secure other requests
+                        .requestMatchers("/login.html", "/api/menu/**").permitAll() // Public auth endpoints
+                        .requestMatchers("/admin-dashboard.html","employee-dashboard.html").authenticated()
+                        .anyRequest().authenticated() // Secure all other endpoints
                 )
-                .httpBasic(Customizer.withDefaults()); // Basic auth enabled (optional)
+                .httpBasic(Customizer.withDefaults());// Enable HTTP Basic auth for testing
 
         return http.build();
-    }
 
+    }
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance(); // ⚠️ For development only
+        return NoOpPasswordEncoder.getInstance(); // Only if passwords in DB are plain text
     }
 }

@@ -5,250 +5,171 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaigrill Restaurant Dashboard</title>
     <style>
-        /* General page styling */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: url('https://images.unsplash.com/photo-1603091864642-07f1ac3f1fa5'); /* Background image */
-            background-size: cover;
-            background-position: center;
-            color: white;
             margin: 0;
-            padding: 0;
+            font-family: 'Poppins', sans-serif;
             height: 100vh;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            color: white;
+            overflow: hidden;
         }
 
-        /* Overlay to darken the background */
-        ::after {
-            content: "";
+        .overlay {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: -1;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
         }
 
-        /* Container for the title and login button */
         .container {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            z-index: 1;
-            color: white;
-            margin-top: 100px;
+            animation: fadeIn 2s ease;
         }
 
         h1 {
-            font-size: 3.5rem;
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-            color: #ff6347;
+            font-size: 4rem;
+            margin: 0 0 20px 0;
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.5);
         }
 
-        p {
-            font-size: 1.4rem;
-            margin-top: 20px;
-            color: #d1d1d1;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Style for the login button */
         .login-btn {
-            padding: 15px 30px;
-            background: linear-gradient(135deg, #ff6347, #ff1493);
+            padding: 15px 40px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
             color: white;
             border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
+            font-size: 1.3rem;
             border-radius: 50px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
-            transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s, background 0.3s;
         }
 
         .login-btn:hover {
-            background: linear-gradient(135deg, #ff1493, #ff6347);
-            transform: scale(1.1);
+            transform: translateY(-5px);
+            background: linear-gradient(to right, #ff4b2b, #ff416c);
         }
 
-        /* Dropdown menu styling */
         .dropdown {
             position: absolute;
-            top: 110px;
-            right: 10px;
+            top: 20px;
+            right: 30px;
             display: none;
-            background-color: #333;
+            flex-direction: column;
+            gap: 10px;
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
-            z-index: 1;
-            width: 200px;
+            z-index: 3;
         }
 
         .dropdown button {
-            width: 100%;
-            padding: 15px;
-            background-color: #444;
-            color: #fff;
-            font-size: 1.2rem;
+            padding: 12px;
+            background: rgba(255,255,255,0.1);
+            color: white;
             border: none;
-            cursor: pointer;
-            text-align: left;
             border-radius: 8px;
-            transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
         }
 
         .dropdown button:hover {
-            background-color: #ff6347;
-            color: #fff;
-            transform: translateX(5px);
+            background: rgba(255,255,255,0.3);
         }
 
-        /* Content section */
-        .content {
-            margin-top: 50px;
-            text-align: center;
-            width: 90%;
-        }
-
-        /* Table styling */
-        table {
-            width: 100%;
-            margin: 30px auto;
-            border-collapse: collapse;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 15px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: center;
-            color: white;
-            font-size: 1.1rem;
-            border: 1px solid #fff;
-        }
-
-        th {
-            background-color: #ff6347;
-        }
-
-        /* Button on hover effect */
-        table td:hover {
-            background-color: rgba(255, 99, 71, 0.5);
-            cursor: pointer;
-        }
-
-        /* Responsive design */
-        @media screen and (max-width: 768px) {
-            .login-btn {
-                width: 100%;
-                padding: 12px 0;
-            }
-
-            table {
-                width: 90%;
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Welcome to Gaigrill Restaurant Dashboard</h1>
-    <p>This is your secure area.</p>
+<div class="overlay"></div>
 
-    <!-- Login Button -->
+<div class="container">
+    <h1>Gaigrill Restaurant Dashboard</h1>
     <button class="login-btn" id="loginBtn">Login Portal</button>
 </div>
 
-<!-- Dropdown Menu -->
 <div class="dropdown" id="dropdownMenu">
-    <button onclick="showAdminManagement()">Admin </button>
-    <button onclick="showChefManagement()">Chef/Kitchen </button>
-    <button onclick="showManagerManagement()">Managers</button>
-    <button onclick="showFrontDeskManagement()">Front Desk </button>
+    <button onclick="showRolePopup('Admin')">Admin</button>
+    <button onclick="showRolePopup('Chef/Kitchen')">Chef/Kitchen</button>
+    <button onclick="showRolePopup('Manager')">Managers</button>
+    <button onclick="showRolePopup('Front Desk')">Front Desk</button>
 </div>
 
-<!-- Content Display -->
-<div class="content" id="dataContainer"></div>
-
 <script>
-    // Toggle the dropdown visibility
     document.getElementById('loginBtn').onclick = function() {
         const dropdown = document.getElementById('dropdownMenu');
-        dropdown.style.display = dropdown.style.display === 'none' || dropdown.style.display === '' ? 'block' : 'none';
+        dropdown.style.display = dropdown.style.display === 'none' || dropdown.style.display === '' ? 'flex' : 'none';
     };
 
-    // Fetch and display admin names from the backend
-    function showAdminManagement() {
-        fetch('/api/dashboard/admins', {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Basic ' + btoa('admin1:adminpass')
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Admin Data:', data);
-            displayData('Admin Management', data);
-        });
-    }
+    function showRolePopup(role) {
+        let apiUrl = "";
+        if (role === 'Admin') apiUrl = '/api/dashboard/admins';
+        if (role === 'Chef/Kitchen') apiUrl = '/api/dashboard/chefs';
+        if (role === 'Manager') apiUrl = '/api/dashboard/managers';
+        if (role === 'Front Desk') apiUrl = '/api/dashboard/frontdesk';
 
-    // Fetch and display chef management data
-    function showChefManagement() {
-        fetch('/api/dashboard/chefs', {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Basic ' + btoa('admin1:adminpass')
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Chef Data:', data);
-            displayData('Chef/Kitchen Management', data);
-        });
-    }
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                let popup = document.createElement('div');
+                popup.style.position = 'fixed';
+                popup.style.top = '30%';
+                popup.style.left = '50%';
+                popup.style.transform = 'translateX(-50%)';
+                popup.style.backgroundColor = '#222';
+                popup.style.color = '#fff';
+                popup.style.padding = '25px';
+                popup.style.borderRadius = '12px';
+                popup.style.boxShadow = '0 0 20px rgba(0,0,0,0.6)';
+                popup.style.textAlign = 'center';
+                popup.style.zIndex = '9999';
 
-    // Fetch and display manager data
-    function showManagerManagement() {
-        fetch('/api/dashboard/managers', {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Basic ' + btoa('admin1:adminpass')
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Manager Data:', data);
-            displayData('Manager Management', data);
-        });
-    }
+                data.forEach(person => {
+                    let button = document.createElement('button');
+                    button.innerText = `Hi ${person.name}!`;
+                    button.style.display = 'block';
+                    button.style.margin = '10px 0';
+                    button.style.padding = '10px 20px';
+                    button.style.borderRadius = '8px';
+                    button.style.background = 'linear-gradient(to right, #00c6ff, #0072ff)';
+                    button.style.color = '#fff';
+                    button.style.border = 'none';
+                    button.style.cursor = 'pointer';
+                    button.onclick = () => {
+                        window.location.href = `/login.html?userId=${person.employeeId}`;
+                    };
+                    popup.appendChild(button);
+                });
 
-    // Fetch and display front desk management data
-    function showFrontDeskManagement() {
-        fetch('/api/dashboard/frontdesk', {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Basic ' + btoa('admin1:adminpass')
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Front Desk Data:', data);
-            displayData('Front Desk Management', data);
-        });
-    }
+                let closeBtn = document.createElement('button');
+                closeBtn.innerText = 'Close';
+                closeBtn.style.marginTop = '20px';
+                closeBtn.style.padding = '10px 20px';
+                closeBtn.style.borderRadius = '8px';
+                closeBtn.style.background = '#ff4b2b';
+                closeBtn.style.color = '#fff';
+                closeBtn.style.border = 'none';
+                closeBtn.style.cursor = 'pointer';
+                closeBtn.onclick = () => popup.remove();
+                popup.appendChild(closeBtn);
 
-    // Function to display the fetched data
-    function displayData(title, data) {
-        const container = document.getElementById('dataContainer');
-        container.innerHTML = `<h2>${title}</h2><table><tr><th>ID</th><th>Name</th><th>Employee ID</th></tr>`;
-        data.forEach(item => {
-            container.innerHTML += `<tr><td>${item.id}</td><td>${item.name}</td><td>${item.employeeId}</td></tr>`;
-        });
-        container.innerHTML += `</table>`;
+                document.body.appendChild(popup);
+            })
+            .catch(() => alert('Failed to load data.'));
     }
 </script>
+
 </body>
 </html>
