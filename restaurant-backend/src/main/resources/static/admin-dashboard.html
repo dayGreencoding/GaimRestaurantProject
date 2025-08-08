@@ -1,223 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>GaiGrill Admin Dashboard</title>
+    <meta charset="UTF-8" />
+    <title>Gaigrill — Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom, #ffecd2, #fcb69f);
+        :root{
+          --bg1:#ffecd2; --bg2:#fcb69f;
+          --primary:#FF3366; --primary-700:#e02b58;
+          --accent:#FF8A00; --accent-700:#e27700;
+          --sky:#3FA9F5; --leaf:#22c55e; --warning:#f59e0b; --muted:#64748b;
+          --card:#ffffff; --ink:#0f172a; --ink-2:#334155;
+          --shadow:0 10px 25px rgba(0,0,0,.12);
+          --radius:14px;
+        }
+        *{box-sizing:border-box}
+        body{
+          margin:0; font-family: "Segoe UI", system-ui, sans-serif; color:var(--ink);
+          background: linear-gradient(180deg,var(--bg1),var(--bg2)); min-height:100vh;
         }
 
-        header {
-            background-color: #ff3366;
-            color: white;
-            padding: 20px;
-            text-align: center;
+        /* Topbar */
+        header{
+          background: linear-gradient(90deg, var(--primary), #FF5A3C);
+          color:#fff; padding:20px 24px; text-align:center; position:sticky; top:0; z-index:10;
+          box-shadow: var(--shadow);
+        }
+        header h1{margin:0; font-size:clamp(22px,3vw,30px); letter-spacing:.5px}
+        header .sub{opacity:.9; margin-top:6px}
+
+        /* Tabs */
+        .tabs{
+          display:flex; gap:10px; padding:14px 18px; flex-wrap:wrap; justify-content:center;
+        }
+        .tab{
+          background:#fff; color:var(--primary); border:none; padding:10px 16px; font-weight:700;
+          border-radius:999px; box-shadow: var(--shadow); cursor:pointer; transition:.15s transform;
+        }
+        .tab:hover{ transform: translateY(-1px) }
+        .tab.active{ background:var(--primary); color:#fff }
+
+        /* Section wrapper */
+        .wrap{ padding: 0 18px 28px; max-width:1200px; margin:0 auto; }
+
+        /* Cards */
+        .cards{ display:grid; grid-template-columns:repeat(4,minmax(180px,1fr)); gap:16px; margin-bottom:22px }
+        @media (max-width: 900px){ .cards{ grid-template-columns:repeat(2,1fr) } }
+        @media (max-width: 520px){ .cards{ grid-template-columns:1fr } }
+
+        .card{
+          background:var(--card); border-radius:var(--radius); padding:16px 18px; box-shadow:var(--shadow);
+        }
+        .kicker{font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted)}
+        .metric{ margin:6px 0 0; font-size:28px; font-weight:800; color:var(--ink) }
+
+        /* Filters + search */
+        .toolbar{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin:8px 0 18px }
+        select, input[type="search"]{
+          background:#fff; border:1px solid #e5e7eb; padding:10px 12px; border-radius:10px; min-width:180px; outline:none;
+          box-shadow: 0 2px 8px rgba(0,0,0,.04);
         }
 
-        h1 {
-            margin: 0;
-            font-size: 2.5rem;
+        /* Tables */
+        .table{
+          width:100%; border-collapse:separate; border-spacing:0; background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;
         }
-
-        .sub-title {
-            font-size: 1.2rem;
-            margin-top: 8px;
+        thead th{
+          background:var(--primary); color:#fff; text-align:left; padding:12px 12px; font-size:14px;
         }
+        tbody td{ padding:12px; border-bottom:1px solid #f1f5f9; color:var(--ink-2) }
+        tbody tr:hover{ background:#fff6f6 }
+        .badge{ padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700; color:#fff; display:inline-block }
+        .b-pending{ background:var(--warning) }
+        .b-preparing{ background:var(--sky) }
+        .b-ready{ background:#8b5cf6 }
+        .b-delivered{ background:var(--leaf) }
+        .row-actions{ display:flex; gap:8px; flex-wrap:wrap }
 
-        .dashboard {
-            padding: 30px;
+        .btn{
+          border:none; border-radius:999px; padding:8px 12px; cursor:pointer; font-weight:700; color:#fff;
+          box-shadow: 0 4px 12px rgba(0,0,0,.12);
         }
+        .btn--update{ background:var(--accent) }
+        .btn--update:hover{ background:var(--accent-700) }
 
-        .filters {
-            margin-bottom: 20px;
-            font-weight: bold;
+        /* Toasts */
+        .toast{
+          position:fixed; right:16px; bottom:16px; background:#111827; color:#fff; padding:12px 16px; border-radius:12px;
+          box-shadow: var(--shadow); opacity:0; transform: translateY(10px); transition:.25s; z-index:9999;
         }
+        .toast.show{ opacity:1; transform: translateY(0) }
 
-        .filters select {
-            padding: 8px 12px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .cards {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 20px;
-            flex: 1;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            min-width: 150px;
-        }
-
-        .card h2 {
-            margin: 0;
-            font-size: 2rem;
-            color: #ff3366;
-        }
-
-        .card p {
-            margin-top: 5px;
-            font-weight: 600;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        }
-
-        thead {
-            background-color: #ff3366;
-            color: white;
-        }
-
-        th, td {
-            padding: 14px 10px;
-            text-align: left;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        footer {
-            background-color: #ffa500;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            font-weight: bold;
-        }
-
-        @media screen and (max-width: 768px) {
-            .cards {
-                flex-direction: column;
-            }
+        footer{
+          text-align:center; color:#fff; padding:14px; font-weight:700; background: linear-gradient(90deg, #FF5A3C, var(--primary));
+          position:sticky; bottom:0; margin-top:28px;
         }
     </style>
 </head>
 <body>
-
 <header>
-    <h1>GaiGrill Admin Dashboard</h1>
-    <div class="sub-title">Manage Employees & Departments</div>
+    <h1>Gaigrill — Admin Dashboard</h1>
+    <div class="sub">Everything at a glance: Employees, Menu, and Live Orders</div>
 </header>
 
-<div class="dashboard">
-    <div class="filters">
-        Filter by Department:
-        <select id="departmentFilter">
-            <option value="All">All</option>
-            <option value="Admin">Admin</option>
-            <option value="Chef/Kitchen">Chef/Kitchen</option>
-            <option value="Manager">Manager</option>
-            <option value="Front Desk">Front Desk</option>
-        </select>
-    </div>
-
-    <div class="cards">
-        <div class="card">
-            <h2 id="totalCount">0</h2>
-            <p>Total Employees</p>
-        </div>
-        <div class="card">
-            <h2 id="adminCount">0</h2>
-            <p>Admins</p>
-        </div>
-        <div class="card">
-            <h2 id="chefCount">0</h2>
-            <p>Kitchen Staff</p>
-        </div>
-        <div class="card">
-            <h2 id="frontDeskCount">0</h2>
-            <p>Front Desk</p>
-        </div>
-    </div>
-
-    <table id="employeeTable">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Employee ID</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>Department</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Data will be populated here -->
-        </tbody>
-    </table>
+<!-- Tabs -->
+<div class="tabs">
+    <button class="tab active" data-tab="employees">Employees</button>
+    <button class="tab" data-tab="menu">Menu</button>
+    <button class="tab" data-tab="orders">Orders</button>
 </div>
 
-<footer>
-    © 2025 GaiGrill Restaurant. All rights reserved.
-</footer>
+<div class="wrap">
+    <!-- KPI Cards -->
+    <section class="cards" id="kpis">
+        <div class="card">
+            <div class="kicker">Total Employees</div>
+            <div class="metric" id="kpi-total">0</div>
+        </div>
+        <div class="card">
+            <div class="kicker">Admins</div>
+            <div class="metric" id="kpi-admins">0</div>
+        </div>
+        <div class="card">
+            <div class="kicker">Kitchen Staff</div>
+            <div class="metric" id="kpi-chefs">0</div>
+        </div>
+        <div class="card">
+            <div class="kicker">Front Desk</div>
+            <div class="metric" id="kpi-frontdesk">0</div>
+        </div>
+    </section>
+
+    <!-- EMPLOYEES -->
+    <section id="panel-employees">
+        <div class="toolbar">
+            <label>
+                <strong>Department:</strong>
+                <select id="departmentFilter">
+                    <option value="All">All</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Chef/Kitchen">Chef/Kitchen</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Front Desk">Front Desk</option>
+                </select>
+            </label>
+            <input type="search" id="empSearch" placeholder="Search name / email / role…" />
+        </div>
+
+        <table class="table" id="employeeTable">
+            <thead>
+            <tr>
+                <th>Name</th><th>Role</th><th>Employee ID</th><th>Email</th><th>Phone</th><th>Address</th><th>Department</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <!-- MENU -->
+    <section id="panel-menu" style="display:none">
+        <div class="toolbar">
+            <input type="search" id="menuSearch" placeholder="Search menu (name / category / type)…" />
+        </div>
+
+        <table class="table" id="menuTable">
+            <thead>
+            <tr>
+                <th>Category</th><th>Type</th><th>Item</th><th>Description</th><th>Price ($)</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <!-- ORDERS -->
+    <section id="panel-orders" style="display:none">
+        <div class="toolbar">
+            <input type="search" id="orderSearch" placeholder="Search orders (customer / item / status)…" />
+        </div>
+
+        <table class="table" id="ordersTable">
+            <thead>
+            <tr>
+                <th>#</th><th>Customer</th><th>Item</th><th>Qty</th><th>Status</th><th>Time</th><th>Actions</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <small style="display:block; margin-top:8px; color:var(--muted)">Auto-refreshes every 10 seconds.</small>
+    </section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>© 2025 Gaigrill Restaurant. All rights reserved.</footer>
 
 <script>
-    const employeeUrl = '/api/dashboard/employees'; // Update if endpoint differs
+    // ====== API ENDPOINTS (adjust if your paths differ) ======
+    const API_EMPLOYEES = '/api/dashboard/employees';
+    const API_MENU      = '/api/dashboard/menu';
+    const API_ORDERS    = '/api/dashboard/orders';
+    // PUT /api/dashboard/orders/{id}/status?value=Preparing
+    const updateOrderStatusUrl = (id, value) => `/api/dashboard/orders/${id}/status?value=${encodeURIComponent(value)}`;
 
-    document.addEventListener('DOMContentLoaded', () => {
-        fetchAndDisplayEmployees();
+    // ====== STATE ======
+    let employees = [];
+    let menuItems = [];
+    let orders = [];
 
-        document.getElementById('departmentFilter').addEventListener('change', function () {
-            fetchAndDisplayEmployees(this.value);
-        });
+    // ====== UTIL ======
+    const el = s => document.querySelector(s);
+    const toast = (msg, ok=true) => {
+      const t = el('#toast');
+      t.textContent = msg;
+      t.style.background = ok ? '#111827' : '#b91c1c';
+      t.classList.add('show');
+      setTimeout(()=> t.classList.remove('show'), 2200);
+    };
+
+    // ====== TABS ======
+    document.querySelectorAll('.tab').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const tab = btn.getAttribute('data-tab');
+        el('#panel-employees').style.display = tab==='employees' ? '' : 'none';
+        el('#panel-menu').style.display      = tab==='menu' ? '' : 'none';
+        el('#panel-orders').style.display    = tab==='orders' ? '' : 'none';
+      });
     });
 
-    function fetchAndDisplayEmployees(department = 'All') {
-        fetch(employeeUrl)
-            .then(res => res.json())
-            .then(data => {
-                const tbody = document.querySelector('#employeeTable tbody');
-                tbody.innerHTML = '';
-
-                let total = 0, admins = 0, chefs = 0, frontdesk = 0;
-
-                data.forEach(emp => {
-                    if (department !== 'All' && emp.department !== department) return;
-
-                    total++;
-                    if (emp.department === 'Admin') admins++;
-                    if (emp.department === 'Chef/Kitchen') chefs++;
-                    if (emp.department === 'Front Desk') frontdesk++;
-
-                    const row = `
-                        <tr>
-                            <td>${emp.name}</td>
-                            <td>${emp.role}</td>
-                            <td>${emp.employeeId}</td>
-                            <td>${emp.email}</td>
-                            <td>${emp.phone}</td>
-                            <td>${emp.address}</td>
-                            <td>${emp.department}</td>
-                        </tr>`;
-                    tbody.insertAdjacentHTML('beforeend', row);
-                });
-
-                document.getElementById('totalCount').textContent = total;
-                document.getElementById('adminCount').textContent = admins;
-                document.getElementById('chefCount').textContent = chefs;
-                document.getElementById('frontDeskCount').textContent = frontdesk;
-            })
-            .catch(err => console.error('Error fetching employees:', err));
+    // ====== FETCHES ======
+    async function fetchEmployees(){
+      const res = await fetch(API_EMPLOYEES);
+      employees = await res.json();
+      renderEmployees();
+      renderEmpKPIs();
     }
-</script>
+    async function fetchMenu(){
+      const res = await fetch(API_MENU);
+      menuItems = await res.json();
+      renderMenu();
+    }
+    async function fetchOrders(){
+      const res = await fetch(API_ORDERS);
+      orders = await res.json();
+      renderOrders();
+    }
 
+    // ====== EMPLOYEES RENDER ======
+    function renderEmpKPIs(){
+      const dep = name => employees.filter(e => (e.department||'').toLowerCase()===name.toLowerCase()).length;
+      el('#kpi-total').textContent = employees.length || 0;
+      el('#kpi-admins').textContent = dep('Admin');
+      el('#kpi-chefs').textContent = dep('Chef/Kitchen');
+      el('#kpi-frontdesk').textContent = dep('Front Desk');
+    }
+
+    function renderEmployees(){
+      const tbody = el('#employeeTable tbody');
+      tbody.innerHTML = '';
+      const department = el('#departmentFilter').value || 'All';
+      const q = (el('#empSearch').value || '').toLowerCase();
+
+      employees
+      .filter(emp => department==='All' || (emp.department===department))
+      .filter(emp => {
+        const blob = `${emp.name} ${emp.email} ${emp.role} ${emp.department}`.toLowerCase();
+        return blob.includes(q);
+      })
+      .forEach(emp=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${emp.name||''}</td>
+          <td>${emp.role||''}</td>
+          <td>${emp.employeeId||''}</td>
+          <td>${emp.email||''}</td>
+          <td>${emp.phone||''}</td>
+          <td>${emp.address||''}</td>
+          <td>${emp.department||''}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ====== MENU RENDER ======
+    function renderMenu(){
+      const tbody = el('#menuTable tbody');
+      tbody.innerHTML = '';
+      const q = (el('#menuSearch').value || '').toLowerCase();
+
+      menuItems
+        .filter(m => {
+          const blob = `${m.category} ${m.type} ${m.item_name || m.itemName} ${m.description}`.toLowerCase();
+          return blob.includes(q);
+        })
+        .forEach(m=>{
+          const name = m.item_name || m.itemName || '';
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${m.category||''}</td>
+            <td>${m.type||''}</td>
+            <td>${name}</td>
+            <td>${m.description||''}</td>
+            <td>${Number(m.price||0).toFixed(2)}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+    }
+
+    // ====== ORDERS RENDER ======
+    function statusBadge(st){
+      const s = (st||'').toLowerCase();
+      if(s==='pending') return '<span class="badge b-pending">Pending</span>';
+      if(s==='preparing') return '<span class="badge b-preparing">Preparing</span>';
+      if(s==='ready') return '<span class="badge b-ready">Ready</span>';
+      if(s==='delivered') return '<span class="badge b-delivered">Delivered</span>';
+      return `<span class="badge" style="background:#94a3b8">${st||'—'}</span>`;
+    }
+
+    function renderOrders(){
+      const tbody = el('#ordersTable tbody');
+      tbody.innerHTML = '';
+      const q = (el('#orderSearch').value || '').toLowerCase();
+
+      orders
+        .filter(o=>{
+          const blob = `${o.id} ${o.customer_name||o.customerName||''} ${o.item_name||o.itemName||''} ${o.status||''}`.toLowerCase();
+          return blob.includes(q);
+        })
+        .forEach(o=>{
+          const id = o.id;
+          const customer = o.customer_name || o.customerName || '—';
+          const item = o.item_name || o.itemName || '—';
+          const qty = o.quantity ?? '—';
+          const status = o.status || '—';
+          const time = o.order_time || o.orderTime || '—';
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${id}</td>
+            <td>${customer}</td>
+            <td>${item}</td>
+            <td>${qty}</td>
+            <td>${statusBadge(status)}</td>
+            <td>${time}</td>
+            <td class="row-actions">
+              <select data-id="${id}" class="status-select">
+                <option ${status==='Pending'?'selected':''}>Pending</option>
+                <option ${status==='Preparing'?'selected':''}>Preparing</option>
+                <option ${status==='Ready'?'selected':''}>Ready</option>
+                <option ${status==='Delivered'?'selected':''}>Delivered</option>
+              </select>
+              <button class="btn btn--update" data-update="${id}">Update</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+      // wire update buttons
+      tbody.querySelectorAll('[data-update]').forEach(btn=>{
+        btn.onclick = async () => {
+          const id = btn.getAttribute('data-update');
+          const sel = tbody.querySelector(`select[data-id="${id}"]`);
+          const value = sel?.value;
+          if(!value){ toast('Pick a status first', false); return; }
+          try{
+            const res = await fetch(updateOrderStatusUrl(id, value), { method:'PUT' });
+            if(!res.ok) throw new Error(`HTTP ${res.status}`);
+            toast(`Order #${id} → ${value}`);
+            fetchOrders(); // refresh list
+          }catch(e){
+            console.error(e);
+            toast('Failed to update status', false);
+          }
+        };
+      });
+    }
+
+    // ====== EVENTS ======
+    el('#departmentFilter').addEventListener('change', renderEmployees);
+    el('#empSearch').addEventListener('input', renderEmployees);
+    el('#menuSearch').addEventListener('input', renderMenu);
+    el('#orderSearch').addEventListener('input', renderOrders);
+
+    // ====== BOOT ======
+    (async function init(){
+      try{
+        await Promise.all([fetchEmployees(), fetchMenu(), fetchOrders()]);
+      }catch(e){
+        console.error(e);
+        toast('Failed to load data', false);
+      }
+      // Auto-refresh orders every 10s
+      setInterval(fetchOrders, 10000);
+    })();
+</script>
 </body>
 </html>

@@ -5,58 +5,26 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "menu_items")
 public class MenuItem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Column(name = "item_name")  // ✅ Corrected mapping
-    private String name;
-
-    private String description;
-
-    private double price;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String category;
+    private String type;
 
-    @Column(name = "sub_category")  // ✅ Correct mapping to DB column
-    private String subCategory;
+    @Column(name = "item_name")
+    private String itemName;
 
-    @Column(name = "image_url")     // ✅ Correct mapping to DB column
-    private String imageUrl;
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
-    // ✅ Getters and Setters
+    private Double price;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public String getCategory() {
@@ -67,19 +35,37 @@ public class MenuItem {
         this.category = category;
     }
 
-    public String getSubCategory() {
-        return subCategory;
+    public String getType() {
+        return type;
     }
 
-    public void setSubCategory(String subCategory) {
-        this.subCategory = subCategory;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    // getters/setters
 }

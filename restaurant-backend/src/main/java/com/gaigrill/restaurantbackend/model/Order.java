@@ -4,24 +4,37 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "orders") // <-- This fixes the SQL syntax error
+@Table(name = "orders") // NOT "order" (reserved)
 public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "customer_name")
+    private String customerName;
+
+    @Column(name = "item_name")
     private String itemName;
-    private int quantity;
+
+    private Integer quantity;
     private String status;
+
+    @Column(name = "order_time")
     private LocalDateTime orderTime;
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getItemName() {
@@ -32,11 +45,11 @@ public class Order {
         this.itemName = itemName;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
@@ -55,4 +68,6 @@ public class Order {
     public void setOrderTime(LocalDateTime orderTime) {
         this.orderTime = orderTime;
     }
+
+    // getters/setters
 }
