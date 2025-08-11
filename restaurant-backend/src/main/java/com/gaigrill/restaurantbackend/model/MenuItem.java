@@ -22,8 +22,7 @@ public class MenuItem {
     @Column(name = "sub_category")  // ✅ Correct mapping to DB column
     private String subCategory;
 
-    @Column(name = "image_url")     // ✅ Correct mapping to DB column
-    private String imageUrl;
+
 
     // ✅ Getters and Setters
 
@@ -75,11 +74,7 @@ public class MenuItem {
         this.subCategory = subCategory;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+
+
 }

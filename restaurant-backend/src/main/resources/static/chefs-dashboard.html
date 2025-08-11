@@ -33,6 +33,30 @@
         nav a:hover {
           text-decoration: underline;
         }
+        #orders td, #orders th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            font-size: xx-large;
+        }
+        .center{
+        margin-left: auto;
+        margin-right: auto;
+        }
+        #orders tr:nth-child(even){background-color: #f2f2f2;}
+        #orders tr:nth-child(odd){background-color: #ffffff;}
+
+        #orders tr:hover {background-color: #ddd;}
+
+        #orders th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #63a4ff;
+            color: white;
+        }
+        #orders td{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -42,5 +66,33 @@
     <a href='#'>Schedule</a>
     <a href='#'>Logout</a>
 </nav>
+<section>
+     <table id="orders" class="center">
+         <tr>
+             <th>Order ID</th>
+             <th>Customer ID</th>
+             <th>First Name</th>
+             <th>Last Name</th>
+             <th>Item Name</th>
+             <th>Quantity</th>
+             <th>Total Amount</th>
+             <th>Status</th>
+         </tr>
+         <tr>
+             <td>Todd</td>
+             <td>Sweet Corn Veg Soup</td>
+             <td>Chef</td>
+             <td>In Progress</td>
+             <td>11111</td>
+         </tr>
+         <tr>
+             <td>Joe</td>
+             <td>Tofu Tikka</td>
+             <td>Chef</td>
+             <td>In Progress</td>
+             <td>22222</td>
+         </tr>
+     </table>
+</section>
 </body>
 </html>
