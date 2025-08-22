@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("/api/menu")
-@CrossOrigin(origins = "http://localhost:5177") // frontend port
+@CrossOrigin(origins = "http://localhost:5173") // frontend port
 public class MenuItemController {
 
     @Autowired

@@ -22,7 +22,7 @@
     </properties>
 
     <dependencies>
-        <!-- Web (REST) -->
+        <!-- Web (Servlet/MVC) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -34,14 +34,14 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- MySQL driver (modern artifact; version managed by Spring Boot) -->
+        <!-- MySQL driver -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- DevTools (runtime only) -->
+        <!-- DevTools (runtime only; exclude from repackaged jar automatically) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -63,7 +63,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- (Optional) Security + Thymeleaf as you had them -->
+        <!-- (Optional) Thymeleaf + Security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -76,34 +76,31 @@
 
     <build>
         <plugins>
-            <!-- Java compiler config -->
+            <!-- Java compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <!-- Use the release flag so source/target match your Java version -->
                     <release>${java.version}</release>
                 </configuration>
             </plugin>
 
-            <!-- Spring Boot plugin (run with: mvn spring-boot:run) -->
+            <!-- Spring Boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- Exec plugin (run with: mvn exec:java) -->
+            <!-- Exec plugin (optional) -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.5.1</version>
                 <configuration>
                     <mainClass>com.gaigrill.restaurantbackend.RestaurantBackendApplication</mainClass>
-                    <!-- Prevent Spring Boot from hanging the build due to non-daemon threads -->
                     <cleanupDaemonThreads>false</cleanupDaemonThreads>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
