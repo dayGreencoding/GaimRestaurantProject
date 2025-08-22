@@ -16,9 +16,6 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @Column(name = "customer_id")
-    private String customerId;
-
     @Column(name = "order_date")
     private LocalDateTime orderDate;
     @Column(name = "status")
@@ -28,7 +25,8 @@ public class Order {
         private Set <OrderItem> orderItems= new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "customer")
+    @JoinColumn(name = "customer_id")
+    @ToString.Exclude
     private Customer customer;
 
 }

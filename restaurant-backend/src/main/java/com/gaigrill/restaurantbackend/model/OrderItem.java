@@ -13,8 +13,6 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_item_id")
     private int orderItemId;
-    @Column(name = "order_id")
-    private int orderId;
     @Column(name = "item_id")
     private int itemId;
     @Column(name = "quantity")
@@ -24,7 +22,7 @@ public class OrderItem {
 
     @ManyToOne
     @ToString.Exclude
-    @JoinColumn(name = "order")
+    @JoinColumn(name = "order_id")
     private Order order;
 
 }
