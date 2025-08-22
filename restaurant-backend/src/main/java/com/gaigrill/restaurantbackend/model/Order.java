@@ -1,73 +1,34 @@
 package com.gaigrill.restaurantbackend.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+import java.util.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Setter
+@ToString
 @Table(name = "orders") // NOT "order" (reserved)
 public class Order {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
     private Long id;
 
-    @Column(name = "customer_name")
-    private String customerName;
+    @Column(name = "customer_id")
+    private String customerId;
 
-    @Column(name = "item_name")
-    private String itemName;
-
-    private Integer quantity;
+    @Column(name = "order_date")
+    private LocalDateTime orderDate;
+    @Column(name = "status")
     private String status;
 
-    @Column(name = "order_time")
-    private LocalDateTime orderTime;
+    @OneToMany(mappedBy = "order")
+        private Set <OrderItem> orderItems= new HashSet<>();
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "customer")
+    private Customer customer;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getOrderTime() {
-        return orderTime;
-    }
-
-    public void setOrderTime(LocalDateTime orderTime) {
-        this.orderTime = orderTime;
-    }
-
-    // getters/setters
 }
